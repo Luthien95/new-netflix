@@ -1,0 +1,12 @@
+p {
+  margin: 0; }
+
+.movie-list__item {
+  padding: 10px;
+  border: 1px solid #f1f1f1;
+  margin: 10px 0; }
+
+.movie-list__basic {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
