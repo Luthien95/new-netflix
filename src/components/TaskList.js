@@ -11,10 +11,13 @@ class TaskList extends React.Component {
     this.state = {
       movieList: [],
       activeMovie: false,
+      activeMovieNumber: null,
+      searchTerm: "",
     };
 
     this.openMovieData = this.openMovieData.bind(this);
     this.getData = this.getData.bind(this);
+    this.setSearchTerm = this.setSearchTerm.bind(this);
   }
 
   componentWillMount() {
@@ -38,19 +41,57 @@ class TaskList extends React.Component {
     });
   }
 
+  setSearchTerm(event) {
+    this.setState({
+      searchTerm: event.target.value,
+    });
+  }
+
   render() {
-    console.log(this.state.movieList);
-    return this.state.movieList.map((movie, id) => (
-      <Movie
-        key={id}
-        name={movie["im:name"].label}
-        category={movie.category.attributes.label}
-        description={movie.summary.label}
-        activeMovie={this.state.activeMovie}
-        openMovieData={this.openMovieData}
-        listNumber={id}
-      />
-    ));
+    const state = this.state.searchTerm;
+    if (state) var searchTerm = state.toLowerCase();
+
+    return (
+      <React.Fragment>
+        <input
+          type="text"
+          placeholder="Search"
+          value={this.state.searchTerm}
+          onChange={this.setSearchTerm}
+        />
+
+        {this.state.searchTerm
+          ? this.state.movieList
+              .filter(function (movie, index) {
+                const label = movie["im:name"].label;
+                const labelInLowerCase = label.toLowerCase();
+
+                return labelInLowerCase.includes(searchTerm);
+              })
+              .map((movie, id) => (
+                <Movie
+                  key={id}
+                  name={movie["im:name"].label}
+                  category={movie.category.attributes.label}
+                  description={movie.summary.label}
+                  activeMovie={this.state.activeMovie}
+                  openMovieData={this.openMovieData}
+                  listNumber={id}
+                />
+              ))
+          : this.state.movieList.map((movie, id) => (
+              <Movie
+                key={id}
+                name={movie["im:name"].label}
+                category={movie.category.attributes.label}
+                description={movie.summary.label}
+                activeMovie={this.state.activeMovie}
+                openMovieData={this.openMovieData}
+                listNumber={id}
+              />
+            ))}
+      </React.Fragment>
+    );
   }
 }
 
@@ -63,7 +104,7 @@ const Movie = ({
   openMovieData,
 }) => {
   const number = listNumber + 1;
-  console.log(description);
+
   return (
     <div className="movie-list__item">
       <Row>
