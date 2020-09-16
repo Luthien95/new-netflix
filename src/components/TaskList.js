@@ -11,7 +11,7 @@ class TaskList extends React.Component {
     this.state = {
       movieList: [],
       activeMovie: false,
-      activeMovieNumber: null,
+      activeMovieId: null,
       searchTerm: "",
     };
 
@@ -35,9 +35,10 @@ class TaskList extends React.Component {
       .catch((error) => console.log("Error" + error));
   }
 
-  openMovieData() {
+  openMovieData(id) {
     this.setState({
       activeMovie: !this.state.activeMovie,
+      activeMovieId: id,
     });
   }
 
@@ -75,6 +76,7 @@ class TaskList extends React.Component {
                   category={movie.category.attributes.label}
                   description={movie.summary.label}
                   activeMovie={this.state.activeMovie}
+                  activeMovieId={this.state.activeMovieId}
                   openMovieData={this.openMovieData}
                   listNumber={id}
                 />
@@ -86,6 +88,7 @@ class TaskList extends React.Component {
                 category={movie.category.attributes.label}
                 description={movie.summary.label}
                 activeMovie={this.state.activeMovie}
+                activeMovieId={this.state.activeMovieId}
                 openMovieData={this.openMovieData}
                 listNumber={id}
               />
@@ -101,6 +104,7 @@ const Movie = ({
   category,
   description,
   activeMovie,
+  activeMovieId,
   openMovieData,
 }) => {
   const number = listNumber + 1;
@@ -110,10 +114,16 @@ const Movie = ({
       <Row>
         <Col className="movie-list__basic">
           <p>{name}</p>
-          <p onClick={openMovieData}>czytaj więcej</p>
+          <p
+            onClick={() => {
+              openMovieData(listNumber);
+            }}
+          >
+            czytaj więcej
+          </p>
         </Col>
       </Row>
-      {activeMovie ? (
+      {activeMovie && activeMovieId === listNumber ? (
         <Row>
           <Col>
             <p>{category}</p>
