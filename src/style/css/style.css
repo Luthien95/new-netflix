@@ -3,8 +3,8 @@ p {
 
 .movie-list__item {
   padding: 10px;
-  border: 1px solid #f1f1f1;
-  margin: 10px 0; }
+  margin: 10px 0;
+  border: 1px solid #f1f1f1; }
 
 .movie-list__basic {
   display: flex;

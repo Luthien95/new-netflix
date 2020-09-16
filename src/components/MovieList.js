@@ -4,53 +4,55 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./../style/css/style.css";
 
-class TaskList extends React.Component {
+class MovieList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       movieList: [],
-      activeMovie: false,
-      activeMovieId: null,
+      isMovieDataWindowOpen: false,
+      openMovieId: null,
       searchTerm: "",
     };
 
-    this.openMovieData = this.openMovieData.bind(this);
-    this.getData = this.getData.bind(this);
+    this.openMovieDataWindow = this.openMovieDataWindow.bind(this);
+    this.getMovieList = this.getMovieList.bind(this);
     this.setSearchTerm = this.setSearchTerm.bind(this);
   }
 
   componentWillMount() {
-    this.getData();
+    this.getMovieList();
   }
 
-  getData() {
+  getMovieList() {
     axios
       .get("https://itunes.apple.com/us/rss/topmovies/limit=100/json")
-      .then((res) => {
+      .then((response) => {
         this.setState({
-          movieList: res.data.feed.entry,
+          movieList: response.data.feed.entry,
         });
       })
       .catch((error) => console.log("Error" + error));
   }
 
-  openMovieData(id) {
+  openMovieDataWindow(openMovieId) {
     this.setState({
-      activeMovie: !this.state.activeMovie,
-      activeMovieId: id,
+      isMovieDataWindowOpen: !this.state.isMovieDataWindowOpen,
+      openMovieId: openMovieId,
     });
   }
 
   setSearchTerm(event) {
+    const newSearchTerm = event.target.value;
+
     this.setState({
-      searchTerm: event.target.value,
+      searchTerm: newSearchTerm,
     });
   }
 
   render() {
-    const state = this.state.searchTerm;
-    if (state) var searchTerm = state.toLowerCase();
+    const searchTerm = this.state.searchTerm;
+    if (searchTerm) var searchTermLowerCase = searchTerm.toLowerCase();
 
     return (
       <React.Fragment>
@@ -64,10 +66,10 @@ class TaskList extends React.Component {
         {this.state.searchTerm
           ? this.state.movieList
               .filter(function (movie, index) {
-                const label = movie["im:name"].label;
-                const labelInLowerCase = label.toLowerCase();
+                const movieLabel = movie["im:name"].label;
+                const movieLabelLowerCase = movieLabel.toLowerCase();
 
-                return labelInLowerCase.includes(searchTerm);
+                return movieLabelLowerCase.includes(searchTermLowerCase);
               })
               .map((movie, id) => (
                 <Movie
@@ -75,9 +77,9 @@ class TaskList extends React.Component {
                   name={movie["im:name"].label}
                   category={movie.category.attributes.label}
                   description={movie.summary.label}
-                  activeMovie={this.state.activeMovie}
-                  activeMovieId={this.state.activeMovieId}
-                  openMovieData={this.openMovieData}
+                  isMovieDataWindowOpen={this.state.isMovieDataWindowOpen}
+                  openMovieId={this.state.openMovieId}
+                  openMovieDataWindow={this.openMovieDataWindow}
                   listNumber={id}
                 />
               ))
@@ -87,9 +89,9 @@ class TaskList extends React.Component {
                 name={movie["im:name"].label}
                 category={movie.category.attributes.label}
                 description={movie.summary.label}
-                activeMovie={this.state.activeMovie}
-                activeMovieId={this.state.activeMovieId}
-                openMovieData={this.openMovieData}
+                isMovieDataWindowOpen={this.state.isMovieDataWindowOpen}
+                openMovieId={this.state.openMovieId}
+                openMovieDataWindow={this.openMovieDataWindow}
                 listNumber={id}
               />
             ))}
@@ -99,15 +101,15 @@ class TaskList extends React.Component {
 }
 
 const Movie = ({
-  listNumber,
   name,
   category,
   description,
-  activeMovie,
-  activeMovieId,
-  openMovieData,
+  isMovieDataWindowOpen,
+  openMovieId,
+  openMovieDataWindow,
+  listNumber,
 }) => {
-  const number = listNumber + 1;
+  const movieNumberOnList = listNumber + 1;
 
   return (
     <div className="movie-list__item">
@@ -116,14 +118,14 @@ const Movie = ({
           <p>{name}</p>
           <p
             onClick={() => {
-              openMovieData(listNumber);
+              openMovieDataWindow(listNumber);
             }}
           >
             czytaj więcej
           </p>
         </Col>
       </Row>
-      {activeMovie && activeMovieId === listNumber ? (
+      {isMovieDataWindowOpen && openMovieId === listNumber ? (
         <Row>
           <Col>
             <p>{category}</p>
@@ -131,9 +133,9 @@ const Movie = ({
           <Col>{description}</Col>
         </Row>
       ) : null}
-      <p>{number}</p>
+      <p>{movieNumberOnList}</p>
     </div>
   );
 };
 
-export default TaskList;
+export default MovieList;
