@@ -7,7 +7,11 @@ function App() {
   return (
     <div className="App">
       <Container className="movie-list">
-        <h1>Top 100 movies</h1>
+        <h1 className="movie-list__header">Top 100 movies</h1>
+        <p className="movie-list__description">
+          Application showing the list of top 100 movies based on the iTunes
+          json file.
+        </p>
         <MovieList />
       </Container>
     </div>

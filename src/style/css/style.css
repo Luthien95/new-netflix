@@ -1,12 +1,395 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+body {
+  font-size: 16px; }
+
 p {
   margin: 0; }
 
+.movie-list__header {
+  margin: 20px 0;
+  font-family: Montserrat; }
+
 .movie-list__item {
   padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #f1f1f1; }
-
-.movie-list__basic {
+  border: 1px solid #f1f1f1;
+  animation: example .5s linear forwards;
+  color: white;
+  background: #353434;
+  height: 300px;
   display: flex;
-  align-items: center;
-  justify-content: space-between; }
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden; }
+
+.movie-list__title {
+  font-size: 1rem;
+  font-family: Montserrat;
+  font-weight: 500;
+  margin-bottom: 10px; }
+
+.movie-list__description {
+  font-family: Roboto;
+  font-size: .7rem;
+  line-height: 1.5;
+  font-weight: 300; }
+
+.movie-list__number {
+  position: absolute;
+  top: 0;
+  font-size: 9rem;
+  font-weight: bold;
+  line-height: 9rem;
+  color: #3f3d3d;
+  right: -15px;
+  width: fit-content;
+  height: auto; }
+
+.movie-list__more-button {
+  margin-top: 10px;
+  font-size: .9rem; }
+
+.movie-list__search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #f1f1f1;
+  margin-bottom: 10px; }
+
+.movie-list__more {
+  position: absolute;
+  background: green;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  bottom: 0;
+  left: 0;
+  height: 0px;
+  overflow: hidden;
+  animation: example1 .5s linear forwards;
+  background-size: contain;
+  background-position: center center;
+  background: black;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+  padding: 20px; }
+  .movie-list__more-description {
+    font-size: .7rem;
+    font-weight: 200; }
+  .movie-list__more-category {
+    margin-bottom: 10px; }
+
+@keyframes example {
+  0% {
+    opacity: 0;
+    transform: scale(1, 0);
+    transform-origin: top left; }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+    transform-origin: top left; } }
+
+.movie-list__item:nth-child(1n) {
+  animation-delay: 0.5s; }
+
+.movie-list__item:nth-child(2n) {
+  animation-delay: 1s; }
+
+.movie-list__item:nth-child(3n) {
+  animation-delay: 1.5s; }
+
+.movie-list__item:nth-child(4n) {
+  animation-delay: 2s; }
+
+.movie-list__item:nth-child(5n) {
+  animation-delay: 2.5s; }
+
+.movie-list__item:nth-child(6n) {
+  animation-delay: 3s; }
+
+.movie-list__item:nth-child(7n) {
+  animation-delay: 3.5s; }
+
+.movie-list__item:nth-child(8n) {
+  animation-delay: 4s; }
+
+.movie-list__item:nth-child(9n) {
+  animation-delay: 4.5s; }
+
+.movie-list__item:nth-child(10n) {
+  animation-delay: 5s; }
+
+.movie-list__item:nth-child(11n) {
+  animation-delay: 5.5s; }
+
+.movie-list__item:nth-child(12n) {
+  animation-delay: 6s; }
+
+.movie-list__item:nth-child(13n) {
+  animation-delay: 6.5s; }
+
+.movie-list__item:nth-child(14n) {
+  animation-delay: 7s; }
+
+.movie-list__item:nth-child(15n) {
+  animation-delay: 7.5s; }
+
+.movie-list__item:nth-child(16n) {
+  animation-delay: 8s; }
+
+.movie-list__item:nth-child(17n) {
+  animation-delay: 8.5s; }
+
+.movie-list__item:nth-child(18n) {
+  animation-delay: 9s; }
+
+.movie-list__item:nth-child(19n) {
+  animation-delay: 9.5s; }
+
+.movie-list__item:nth-child(20n) {
+  animation-delay: 10s; }
+
+.movie-list__item:nth-child(21n) {
+  animation-delay: 10.5s; }
+
+.movie-list__item:nth-child(22n) {
+  animation-delay: 11s; }
+
+.movie-list__item:nth-child(23n) {
+  animation-delay: 11.5s; }
+
+.movie-list__item:nth-child(24n) {
+  animation-delay: 12s; }
+
+.movie-list__item:nth-child(25n) {
+  animation-delay: 12.5s; }
+
+.movie-list__item:nth-child(26n) {
+  animation-delay: 13s; }
+
+.movie-list__item:nth-child(27n) {
+  animation-delay: 13.5s; }
+
+.movie-list__item:nth-child(28n) {
+  animation-delay: 14s; }
+
+.movie-list__item:nth-child(29n) {
+  animation-delay: 14.5s; }
+
+.movie-list__item:nth-child(30n) {
+  animation-delay: 15s; }
+
+.movie-list__item:nth-child(31n) {
+  animation-delay: 15.5s; }
+
+.movie-list__item:nth-child(32n) {
+  animation-delay: 16s; }
+
+.movie-list__item:nth-child(33n) {
+  animation-delay: 16.5s; }
+
+.movie-list__item:nth-child(34n) {
+  animation-delay: 17s; }
+
+.movie-list__item:nth-child(35n) {
+  animation-delay: 17.5s; }
+
+.movie-list__item:nth-child(36n) {
+  animation-delay: 18s; }
+
+.movie-list__item:nth-child(37n) {
+  animation-delay: 18.5s; }
+
+.movie-list__item:nth-child(38n) {
+  animation-delay: 19s; }
+
+.movie-list__item:nth-child(39n) {
+  animation-delay: 19.5s; }
+
+.movie-list__item:nth-child(40n) {
+  animation-delay: 20s; }
+
+.movie-list__item:nth-child(41n) {
+  animation-delay: 20.5s; }
+
+.movie-list__item:nth-child(42n) {
+  animation-delay: 21s; }
+
+.movie-list__item:nth-child(43n) {
+  animation-delay: 21.5s; }
+
+.movie-list__item:nth-child(44n) {
+  animation-delay: 22s; }
+
+.movie-list__item:nth-child(45n) {
+  animation-delay: 22.5s; }
+
+.movie-list__item:nth-child(46n) {
+  animation-delay: 23s; }
+
+.movie-list__item:nth-child(47n) {
+  animation-delay: 23.5s; }
+
+.movie-list__item:nth-child(48n) {
+  animation-delay: 24s; }
+
+.movie-list__item:nth-child(49n) {
+  animation-delay: 24.5s; }
+
+.movie-list__item:nth-child(50n) {
+  animation-delay: 25s; }
+
+.movie-list__item:nth-child(51n) {
+  animation-delay: 25.5s; }
+
+.movie-list__item:nth-child(52n) {
+  animation-delay: 26s; }
+
+.movie-list__item:nth-child(53n) {
+  animation-delay: 26.5s; }
+
+.movie-list__item:nth-child(54n) {
+  animation-delay: 27s; }
+
+.movie-list__item:nth-child(55n) {
+  animation-delay: 27.5s; }
+
+.movie-list__item:nth-child(56n) {
+  animation-delay: 28s; }
+
+.movie-list__item:nth-child(57n) {
+  animation-delay: 28.5s; }
+
+.movie-list__item:nth-child(58n) {
+  animation-delay: 29s; }
+
+.movie-list__item:nth-child(59n) {
+  animation-delay: 29.5s; }
+
+.movie-list__item:nth-child(60n) {
+  animation-delay: 30s; }
+
+.movie-list__item:nth-child(61n) {
+  animation-delay: 30.5s; }
+
+.movie-list__item:nth-child(62n) {
+  animation-delay: 31s; }
+
+.movie-list__item:nth-child(63n) {
+  animation-delay: 31.5s; }
+
+.movie-list__item:nth-child(64n) {
+  animation-delay: 32s; }
+
+.movie-list__item:nth-child(65n) {
+  animation-delay: 32.5s; }
+
+.movie-list__item:nth-child(66n) {
+  animation-delay: 33s; }
+
+.movie-list__item:nth-child(67n) {
+  animation-delay: 33.5s; }
+
+.movie-list__item:nth-child(68n) {
+  animation-delay: 34s; }
+
+.movie-list__item:nth-child(69n) {
+  animation-delay: 34.5s; }
+
+.movie-list__item:nth-child(70n) {
+  animation-delay: 35s; }
+
+.movie-list__item:nth-child(71n) {
+  animation-delay: 35.5s; }
+
+.movie-list__item:nth-child(72n) {
+  animation-delay: 36s; }
+
+.movie-list__item:nth-child(73n) {
+  animation-delay: 36.5s; }
+
+.movie-list__item:nth-child(74n) {
+  animation-delay: 37s; }
+
+.movie-list__item:nth-child(75n) {
+  animation-delay: 37.5s; }
+
+.movie-list__item:nth-child(76n) {
+  animation-delay: 38s; }
+
+.movie-list__item:nth-child(77n) {
+  animation-delay: 38.5s; }
+
+.movie-list__item:nth-child(78n) {
+  animation-delay: 39s; }
+
+.movie-list__item:nth-child(79n) {
+  animation-delay: 39.5s; }
+
+.movie-list__item:nth-child(80n) {
+  animation-delay: 40s; }
+
+.movie-list__item:nth-child(81n) {
+  animation-delay: 40.5s; }
+
+.movie-list__item:nth-child(82n) {
+  animation-delay: 41s; }
+
+.movie-list__item:nth-child(83n) {
+  animation-delay: 41.5s; }
+
+.movie-list__item:nth-child(84n) {
+  animation-delay: 42s; }
+
+.movie-list__item:nth-child(85n) {
+  animation-delay: 42.5s; }
+
+.movie-list__item:nth-child(86n) {
+  animation-delay: 43s; }
+
+.movie-list__item:nth-child(87n) {
+  animation-delay: 43.5s; }
+
+.movie-list__item:nth-child(88n) {
+  animation-delay: 44s; }
+
+.movie-list__item:nth-child(89n) {
+  animation-delay: 44.5s; }
+
+.movie-list__item:nth-child(90n) {
+  animation-delay: 45s; }
+
+.movie-list__item:nth-child(91n) {
+  animation-delay: 45.5s; }
+
+.movie-list__item:nth-child(92n) {
+  animation-delay: 46s; }
+
+.movie-list__item:nth-child(93n) {
+  animation-delay: 46.5s; }
+
+.movie-list__item:nth-child(94n) {
+  animation-delay: 47s; }
+
+.movie-list__item:nth-child(95n) {
+  animation-delay: 47.5s; }
+
+.movie-list__item:nth-child(96n) {
+  animation-delay: 48s; }
+
+.movie-list__item:nth-child(97n) {
+  animation-delay: 48.5s; }
+
+.movie-list__item:nth-child(98n) {
+  animation-delay: 49s; }
+
+.movie-list__item:nth-child(99n) {
+  animation-delay: 49.5s; }
+
+.movie-list__item:nth-child(100n) {
+  animation-delay: 50s; }
+
+@keyframes example1 {
+  0% {
+    height: 0; }
+  100% {
+    height: 100%; } }
