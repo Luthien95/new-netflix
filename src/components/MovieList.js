@@ -118,7 +118,12 @@ class MovieList extends React.Component {
                   />
                 ))}
         </Row>
-        <button onClick={this.showMoreMovieItems}>Show more...</button>
+        <button
+          onClick={this.showMoreMovieItems}
+          className="movie-list__button"
+        >
+          Show more...
+        </button>
       </React.Fragment>
     );
   }

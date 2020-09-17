@@ -14,15 +14,6 @@ export const Movie = ({
 }) => {
   const movieNumberOnList = listNumber + 1;
 
-  console.log(backgroundImage);
-  console.log(backgroundImage[0].attributes);
-  /*
-  const filtered = data.filter((entry) =>
-    Object.values(entry).some(
-      (val) => typeof val === "string" && val.includes(keyword)
-    )
-  );
-*/
   const movieImage = backgroundImage.filter((image) =>
     Object.values(image.attributes).some(
       (val) => typeof val === "string" && val.includes("170")
@@ -32,11 +23,11 @@ export const Movie = ({
   var backgroundImageUrl = movieImage[0].label;
 
   var movieStyle = {
-    backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, .8)), url(${backgroundImageUrl})`,
+    backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, .7)), url(${backgroundImageUrl})`,
   };
 
   return (
-    <Col md={3} className="movie-list__item">
+    <Col md={3} sm={4} xs={12} className="movie-list__item">
       <Col md="12">
         <Row>
           <Col className="movie-list__basic">
@@ -58,11 +49,27 @@ export const Movie = ({
         </Row>
       </Col>
       <p className="movie-list__number">{movieNumberOnList}</p>
-      <Col md="12" className="movie-list__more" style={movieStyle}>
-        <Row>
+      <Col
+        md="12"
+        className={
+          isMovieDataWindowOpen && openMovieId === listNumber
+            ? "movie-list__more movie-list__more--open"
+            : "movie-list__more"
+        }
+        style={movieStyle}
+      >
+        <Row className="movie-list__more-row p-3">
           <Col>
             <p className="movie-list__more-category">{category}</p>
             <p className="movie-list__more-description">{description}</p>
+            <p
+              onClick={() => {
+                openMovieDataWindow(listNumber);
+              }}
+              className="movie-list__more-button"
+            >
+              czytaj mniej
+            </p>
           </Col>
         </Row>
       </Col>
