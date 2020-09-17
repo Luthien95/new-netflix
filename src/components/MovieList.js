@@ -2,9 +2,7 @@ import React from "react";
 import axios from "axios";
 import Movie from "./Movie";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "./../style/css/style.css";
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 class MovieList extends React.Component {
   constructor(props) {
@@ -15,7 +13,8 @@ class MovieList extends React.Component {
       isMovieDataWindowOpen: false,
       openMovieId: null,
       searchTerm: "",
-      showItems: 9,
+      showItems: 8,
+      movieNumberInList: 1,
     };
 
     this.openMovieDataWindow = this.openMovieDataWindow.bind(this);
@@ -32,9 +31,20 @@ class MovieList extends React.Component {
     axios
       .get("https://itunes.apple.com/us/rss/topmovies/limit=100/json")
       .then((response) => {
-        console.log(response);
         this.setState({
           movieList: response.data.feed.entry,
+        });
+      })
+      .then((response) => {
+        this.state.movieList.map((movie) => {
+          console.log(movie);
+          this.setState({
+            movie: {
+              ...this.state.movie,
+              bb: 1,
+            },
+            movieNumberInList: this.state.movieNumberInList + 1,
+          });
         });
       })
       .catch((error) => console.log("Error" + error));
@@ -56,20 +66,19 @@ class MovieList extends React.Component {
   }
 
   showMoreMovieItems() {
-    console.log("clicked");
     this.setState({
       showItems:
         this.state.showItems >= this.state.movieList.length
           ? this.state.showItems
-          : this.state.showItems + 9,
+          : this.state.showItems + 8,
     });
-    console.log(this.state.showItems >= this.state.searchTerm.length);
   }
 
   render() {
     const searchTerm = this.state.searchTerm;
     if (searchTerm) var searchTermLowerCase = searchTerm.toLowerCase();
 
+    console.log(this.state.movieList);
     return (
       <React.Fragment>
         <input
@@ -92,14 +101,14 @@ class MovieList extends React.Component {
                 .map((movie, id) => (
                   <Movie
                     key={id}
-                    name={movie["im:name"].label}
-                    category={movie.category.attributes.label}
-                    description={movie.summary.label}
-                    backgroundImage={movie["im:image"]}
+                    movieName={movie["im:name"].label}
+                    movieCategory={movie.category.attributes.label}
+                    movieDescription={movie.summary.label}
+                    movieBackgroundImage={movie["im:image"]}
                     isMovieDataWindowOpen={this.state.isMovieDataWindowOpen}
                     openMovieId={this.state.openMovieId}
                     openMovieDataWindow={this.openMovieDataWindow}
-                    listNumber={id}
+                    movieListNumber={id}
                   />
                 ))
             : this.state.movieList
@@ -107,14 +116,14 @@ class MovieList extends React.Component {
                 .map((movie, id) => (
                   <Movie
                     key={id}
-                    name={movie["im:name"].label}
-                    category={movie.category.attributes.label}
-                    description={movie.summary.label}
-                    backgroundImage={movie["im:image"]}
+                    movieName={movie["im:name"].label}
+                    movieCategory={movie.category.attributes.label}
+                    movieDescription={movie.summary.label}
+                    movieBackgroundImage={movie["im:image"]}
                     isMovieDataWindowOpen={this.state.isMovieDataWindowOpen}
                     openMovieId={this.state.openMovieId}
                     openMovieDataWindow={this.openMovieDataWindow}
-                    listNumber={id}
+                    movieListNumber={id}
                   />
                 ))}
         </Row>

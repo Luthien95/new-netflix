@@ -1,20 +1,23 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 export const Movie = ({
-  name,
-  category,
-  description,
-  backgroundImage,
+  movieName,
+  movieCategory,
+  movieDescription,
+  movieBackgroundImage,
   isMovieDataWindowOpen,
   openMovieId,
   openMovieDataWindow,
-  listNumber,
+  movieListNumber,
 }) => {
-  const movieNumberOnList = listNumber + 1;
+  const movieNumberOnList = movieListNumber + 1;
 
-  const movieImage = backgroundImage.filter((image) =>
+  const movieImage = movieBackgroundImage.filter((image) =>
     Object.values(image.attributes).some(
       (val) => typeof val === "string" && val.includes("170")
     )
@@ -27,49 +30,49 @@ export const Movie = ({
   };
 
   return (
-    <Col md={3} sm={4} xs={12} className="movie-list__item">
+    <Col md={3} sm={4} xs={12} className="movie-item">
       <Col md="12">
         <Row>
-          <Col className="movie-list__basic">
-            <p className="movie-list__title">{name}</p>
-            <p className="movie-list__description">
-              {description.length > 70
-                ? description.slice(0, 70) + "..."
-                : description}{" "}
+          <Col>
+            <p className="movie-item__title">{movieName}</p>
+            <p className="movie-item__description">
+              {movieDescription.length > 100
+                ? movieDescription.slice(0, 100) + "..."
+                : movieDescription}{" "}
             </p>
-            <p
+            <button
               onClick={() => {
-                openMovieDataWindow(listNumber);
+                openMovieDataWindow(movieListNumber);
               }}
-              className="movie-list__more-button"
+              className="movie-item__button"
             >
-              czytaj więcej
-            </p>
+              read more <FontAwesomeIcon icon={faChevronRight} />
+            </button>
           </Col>
         </Row>
       </Col>
-      <p className="movie-list__number">{movieNumberOnList}</p>
+      <p className="movie-item__number">{movieNumberOnList}</p>
       <Col
         md="12"
         className={
-          isMovieDataWindowOpen && openMovieId === listNumber
-            ? "movie-list__more movie-list__more--open"
-            : "movie-list__more"
+          isMovieDataWindowOpen && openMovieId === movieListNumber
+            ? "movie-item__more-container movie-item__more-container--open"
+            : "movie-item__more-container"
         }
         style={movieStyle}
       >
-        <Row className="movie-list__more-row p-3">
-          <Col>
-            <p className="movie-list__more-category">{category}</p>
-            <p className="movie-list__more-description">{description}</p>
-            <p
+        <Row>
+          <Col className="movie-item__row p-0">
+            <p className="movie-item__category">{movieCategory}</p>
+            <p className="movie-item__description">{movieDescription}</p>
+            <button
               onClick={() => {
-                openMovieDataWindow(listNumber);
+                openMovieDataWindow(movieListNumber);
               }}
-              className="movie-list__more-button"
+              className="movie-item__button"
             >
-              czytaj mniej
-            </p>
+              <FontAwesomeIcon icon={faChevronLeft} /> read less
+            </button>
           </Col>
         </Row>
       </Col>
@@ -78,32 +81,3 @@ export const Movie = ({
 };
 
 export default Movie;
-/*
-
- <Col md={3} className="movie-list__item">
-      <Col md="12">
-        <Row>
-          <Col className="movie-list__basic">
-            <p>{name}</p>
-            <p
-              onClick={() => {
-                openMovieDataWindow(listNumber);
-              }}
-            >
-              czytaj więcej
-            </p>
-          </Col>
-        </Row>
-        {isMovieDataWindowOpen && openMovieId === listNumber ? (
-          <Row>
-            <Col>
-              <p>{category}</p>
-            </Col>
-            <Col>{description}</Col>
-          </Row>
-        ) : null}
-        <p>{movieNumberOnList}</p>
-      </Col>
-    </Col>
-
-    */
