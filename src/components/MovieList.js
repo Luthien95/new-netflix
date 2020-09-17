@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import Movie from "./Movie";
 import Row from "react-bootstrap/Row";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import "./../style/css/style.css";
 
 class MovieList extends React.Component {
@@ -14,7 +16,7 @@ class MovieList extends React.Component {
       openMovieId: null,
       searchTerm: "",
       showItems: 8,
-      movieNumberInList: 1,
+      movieNumberInList: 0,
     };
 
     this.openMovieDataWindow = this.openMovieDataWindow.bind(this);
@@ -35,14 +37,18 @@ class MovieList extends React.Component {
           movieList: response.data.feed.entry,
         });
       })
-      .then((response) => {
-        this.state.movieList.map((movie) => {
-          console.log(movie);
+      .then(() => {
+        this.state.movieList.map((movie, id) => {
+          let movieList = [...this.state.movieList];
+          let movieItem = {
+            ...movieList[id],
+            movieId: this.state.movieNumberInList,
+          };
+
+          movieList[id] = movieItem;
+
           this.setState({
-            movie: {
-              ...this.state.movie,
-              bb: 1,
-            },
+            movieList,
             movieNumberInList: this.state.movieNumberInList + 1,
           });
         });
@@ -78,7 +84,6 @@ class MovieList extends React.Component {
     const searchTerm = this.state.searchTerm;
     if (searchTerm) var searchTermLowerCase = searchTerm.toLowerCase();
 
-    console.log(this.state.movieList);
     return (
       <React.Fragment>
         <input
@@ -88,7 +93,6 @@ class MovieList extends React.Component {
           onChange={this.setSearchTerm}
           className="movie-list__search-input"
         />
-
         <Row className="mx-0">
           {this.state.searchTerm
             ? this.state.movieList
@@ -108,7 +112,7 @@ class MovieList extends React.Component {
                     isMovieDataWindowOpen={this.state.isMovieDataWindowOpen}
                     openMovieId={this.state.openMovieId}
                     openMovieDataWindow={this.openMovieDataWindow}
-                    movieListNumber={id}
+                    movieListNumber={movie.movieId}
                   />
                 ))
             : this.state.movieList
@@ -123,16 +127,18 @@ class MovieList extends React.Component {
                     isMovieDataWindowOpen={this.state.isMovieDataWindowOpen}
                     openMovieId={this.state.openMovieId}
                     openMovieDataWindow={this.openMovieDataWindow}
-                    movieListNumber={id}
+                    movieListNumber={movie.movieId}
                   />
                 ))}
         </Row>
-        <button
-          onClick={this.showMoreMovieItems}
-          className="movie-list__button"
-        >
-          Show more...
-        </button>
+        {this.state.searchTerm ? null : (
+          <button
+            onClick={this.showMoreMovieItems}
+            className="movie-list__button"
+          >
+            Show more <FontAwesomeIcon icon={faChevronRight} />
+          </button>
+        )}
       </React.Fragment>
     );
   }

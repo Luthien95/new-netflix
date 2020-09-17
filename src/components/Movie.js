@@ -31,7 +31,7 @@ export const Movie = ({
 
   return (
     <Col md={3} sm={4} xs={12} className="movie-item">
-      <Col md="12">
+      <Col md={12}>
         <Row>
           <Col>
             <p className="movie-item__title">{movieName}</p>
@@ -53,7 +53,7 @@ export const Movie = ({
       </Col>
       <p className="movie-item__number">{movieNumberOnList}</p>
       <Col
-        md="12"
+        md={12}
         className={
           isMovieDataWindowOpen && openMovieId === movieListNumber
             ? "movie-item__more-container movie-item__more-container--open"

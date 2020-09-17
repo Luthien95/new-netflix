@@ -49,7 +49,7 @@ button {
     height: 0; } }
 
 .movie-list {
-  padding-bottom: 40px; }
+  padding-bottom: 70px; }
   .movie-list__header {
     margin: 20px 0;
     font-family: Montserrat; }
@@ -59,14 +59,15 @@ button {
     border: 1px solid #f1f1f1;
     margin: 20px 0 10px 0; }
   .movie-list__button {
-    float: right; }
+    float: right;
+    margin: 10px 0; }
 
 .movie-item {
   padding: 10px;
   border: 1px solid #f1f1f1;
   animation: loadContainer .3s linear forwards;
   color: white;
-  background: #353434;
+  background: #282727;
   height: 300px;
   display: flex;
   align-items: flex-end;
@@ -94,10 +95,11 @@ button {
     font-size: 9rem;
     font-weight: bold;
     line-height: 9rem;
-    color: #3f3d3d;
+    color: #2e2c2c;
     right: -15px;
     width: fit-content;
-    height: auto; }
+    height: auto;
+    z-index: -1; }
   .movie-item__more-container {
     position: absolute;
     width: 100%;
